@@ -9,7 +9,6 @@ spark = SparkSession.builder.master("local[*]").getOrCreate()
 # user_id_target=666666
 user_id_target=0
 
-
 ratings = spark.read.csv("dataset/rating_test.csv", header=True,inferSchema=True,sep=",")
 # ratings = spark.read.csv("gs://anime-jar/rating_complete.csv", header=True,inferSchema=True,sep=",")
 anime = spark.read.csv("dataset/anime.csv", header=True,inferSchema=True,sep=",",escape="\"")
@@ -23,6 +22,7 @@ ratings_movies= ratings.filter(ratings['Type']=="Movie")
 ratings_movies.show()
 ratings = [ratings_movies,ratings_tv]
 
+i=0
 for r in ratings:
 # Dividimos el dataset en train/test
     (training,test) = r.randomSplit([0.8, 0.2])
@@ -33,15 +33,12 @@ for r in ratings:
     predictions = model.transform(test)
     evaluator = RegressionEvaluator(metricName="rmse", labelCol="rating", predictionCol="prediction")
     rmse = evaluator.evaluate(predictions)
-    users = r.filter(r["user_id"]==0)
-    userSubsetRecs = model.recommendForUserSubset(users, 0)
+    users = r.filter(r["user_id"]==user_id_target)
+    userSubsetRecs = model.recommendForUserSubset(users, 5)
     movies=userSubsetRecs.first()['recommendations']
-    print(movies)
-# userSubsetRecs.show(truncate=False)
     recommendations=[]
     for movie in movies:
         recommendations.append(movie['anime_id'])
-    # result = anime.filter((anime.ID).isin(recommendations)).select('ID','English name','Japanese name')
-    print(anime.filter((anime.ID).isin(recommendations)).select('ID','English name','Japanese name'))
-    # print(result)
-    # result.coalesce(1).write.format("text").option("header", "false").mode("append").save("output.txt")
+    anime.filter((anime.ID).isin(recommendations)).select('ID','English name','Japanese name').write.format("com.databricks.spark.csv").option("header", "true").save("output_{}".format(i))
+    i+=1
+
