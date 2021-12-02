@@ -24,12 +24,12 @@ ratings = [ratings_movies,ratings_tv]
 
 i=0
 for r in ratings:
-# Dividimos el dataset en train/test
+    # Dividimos el dataset en train/test
     (training,test) = r.randomSplit([0.8, 0.2])
-# Entrenamos el modelo. La estrategia coldstartcon 'drop' descarta valores NaN en evaluación
+    # Entrenamos el modelo. La estrategia coldstartcon 'drop' descarta valores NaN en evaluación
     als = ALS(maxIter=5, regParam=0.01, userCol="user_id", itemCol="anime_id", ratingCol="rating", coldStartStrategy="drop")
     model=als.fit(training)
-# Evaluamos el modelo con RMSE
+    # Evaluamos el modelo con RMSE
     predictions = model.transform(test)
     evaluator = RegressionEvaluator(metricName="rmse", labelCol="rating", predictionCol="prediction")
     rmse = evaluator.evaluate(predictions)
@@ -39,6 +39,7 @@ for r in ratings:
     recommendations=[]
     for movie in movies:
         recommendations.append(movie['anime_id'])
-    anime.filter((anime.ID).isin(recommendations)).select('ID','English name','Japanese name').write.format("com.databricks.spark.csv").option("header", "true").save("output_{}".format(i))
+    result = anime.filter((anime.ID).isin(recommendations)).select('ID','English name','Japanese name')
+    result.write.format("com.databricks.spark.csv").option("header", "true").save("output_{}".format(i))
     i+=1
 
