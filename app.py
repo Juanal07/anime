@@ -40,7 +40,7 @@ for r in ratings:
     result = anime.filter((anime.ID).isin(recommendations)).select('ID','English name','Japanese name')
     # result.write.format("com.databricks.spark.csv").option("header", "true").save("output_{}".format(i))
     sys.stdout = open(names[i], "w")
-    result.show()
+    result.show(truncate=False)
     sys.stdout.close()
     i+=1
 
