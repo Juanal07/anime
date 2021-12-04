@@ -1,26 +1,24 @@
-from pyspark import SparkConf, SparkContext
 from pyspark.sql import SparkSession
 from pyspark.ml.evaluation import RegressionEvaluator
 from pyspark.ml.recommendation import ALS
-from pyspark.sql import Row
+import sys
 
 spark = SparkSession.builder.master("local[*]").getOrCreate()
 
-# user_id_target=666666
 user_id_target=0
+# user_id_target=666666
 
 ratings = spark.read.csv("dataset/rating_test.csv", header=True,inferSchema=True,sep=",")
-# ratings = spark.read.csv("gs://anime-jar/rating_complete.csv", header=True,inferSchema=True,sep=",")
 anime = spark.read.csv("dataset/anime.csv", header=True,inferSchema=True,sep=",",escape="\"")
+# ratings = spark.read.csv("gs://anime-jar/rating_complete.csv", header=True,inferSchema=True,sep=",")
 # anime = spark.read.csv("gs://anime-jarr/anime.csv", header=True,inferSchema=True,sep=",",escape="\"")
 
 ratings = ratings.join(anime,ratings.anime_id==anime.ID,"inner").select(ratings["*"],anime["Type"])
-# ratings.show()
 ratings_tv= ratings.filter(ratings['Type']=="TV")
-ratings_tv.show()
 ratings_movies= ratings.filter(ratings['Type']=="Movie")
-ratings_movies.show()
 ratings = [ratings_movies,ratings_tv]
+# ratings = [ratings_tv]
+names = ["peliculas.txt","series.txt"]
 
 i=0
 for r in ratings:
@@ -40,6 +38,9 @@ for r in ratings:
     for movie in movies:
         recommendations.append(movie['anime_id'])
     result = anime.filter((anime.ID).isin(recommendations)).select('ID','English name','Japanese name')
-    result.write.format("com.databricks.spark.csv").option("header", "true").save("output_{}".format(i))
+    # result.write.format("com.databricks.spark.csv").option("header", "true").save("output_{}".format(i))
+    sys.stdout = open(names[i], "w")
+    result.show()
+    sys.stdout.close()
     i+=1
 
