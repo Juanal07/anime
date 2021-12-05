@@ -7,12 +7,8 @@ from google.cloud import storage
 spark = SparkSession.builder.master("local[*]").getOrCreate()
 storage_client = storage.Client()
 bucket = storage_client.bucket('anime-jarr')
-
-# user_id_target=0
 user_id_target=666666
 
-# ratings = spark.read.csv("dataset/rating_test.csv", header=True,inferSchema=True,sep=",")
-# anime = spark.read.csv("dataset/anime.csv", header=True,inferSchema=True,sep=",",escape="\"")
 ratings = spark.read.csv("gs://anime-jarr/rating_complete.csv", header=True,inferSchema=True,sep=",")
 anime = spark.read.csv("gs://anime-jarr/anime.csv", header=True,inferSchema=True,sep=",",escape="\"")
 
