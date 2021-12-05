@@ -2,6 +2,7 @@ from pyspark.sql import SparkSession
 from pyspark.ml.evaluation import RegressionEvaluator
 from pyspark.ml.recommendation import ALS
 import sys
+import cloudstorage as gcs
 
 spark = SparkSession.builder.master("local[*]").getOrCreate()
 
@@ -35,8 +36,10 @@ for r in ratings:
         recommendations.append(movie['anime_id'])
     result = anime.filter((anime.ID).isin(recommendations)).select('ID','English name','Japanese name')
     # sys.stdout = open("output/"+names[i], "w+")
-    sys.stdout = open("gs://anime-jarr/{}".format(names[i]), "w+")
-    result.show(truncate=False)
-    sys.stdout.close()
+    # result.show(truncate=False)
+    # sys.stdout.close()
+    gcs_file = gcs.open("gs://anime-jarr/{}".format(names[i]), "w+")
+    gcs_file.write('abcde\n')
+    gcs_file.close()
     i+=1
 
