@@ -28,7 +28,7 @@ for r in ratings:
     rmse = evaluator.evaluate(predictions)
     users = r.filter(r["user_id"]==user_id_target)
     userSubsetRecs = model.recommendForUserSubset(users, 5)
-    userSubsetRecs.show()
+    userSubsetRecs.show(truncate=False)
     movies=userSubsetRecs.first()['recommendations']
     recommendations=[]
     for movie in movies:
