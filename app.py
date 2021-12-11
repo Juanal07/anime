@@ -55,11 +55,3 @@ def save(df,name):
 save(df_tv, 'series')
 save(df_movie, 'peliculas')
 
-# 1.15 con 10 y 0.1
-# error con 20 y 0.1
-# 1.59 con 10 y 1.0
-# 1.13 con 15 y 0.01
-# 1.13 con 15 y 0.1
-# implicit prefs true, 5 y 0.01
-# implicit prefs true, 5 y 0.01 7.1
-# implicit prefs true, 10 y 0.1 
