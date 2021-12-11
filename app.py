@@ -68,8 +68,9 @@ print(result_pandas)
 # movies = result.filter(result['Type']=="Movie")
 
 def save(df):
-    df.savetxt("prueba.txt")
+    # df.savetxt("prueba.txt")
     df.to_csv("prueba.csv")
+    df.to_html("prueba.html")
 
 save(result_pandas)
 
