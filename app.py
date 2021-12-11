@@ -58,19 +58,20 @@ for movie in movies:
 
 result = anime.filter((anime.ID).isin(recommendations)).select('ID','Name','Japanese name','Type')
 
-result_pandas = result.toPandas()
-print(result_pandas)
-print('valor: '+result_pandas[0]['ID'])
+df = result.toPandas()
 
 import requests
 
-r = requests.get('https://api.jikan.moe/v3/anime/'+result_pandas[0]['ID'])
-image=r.json()['image_url']
-print(r.json()['image_url'])
-video=r.json()['trailer_url']
-print(r.json()['trailer_url'])
-imagenes=[image,0,1,0,1]
-result_pandas['Image'] = imagenes
+images = []
+for i in range(5):
+    r = requests.get('https://api.jikan.moe/v3/anime/'+str(df.iloc[i].loc['ID']))
+    image=r.json()['image_url']
+    print(r.json()['image_url'])
+    video=r.json()['trailer_url']
+    print(r.json()['trailer_url'])
+    images.append(image)
+
+df['Image'] = images
 
 
 # names = ["peliculas.txt","series.txt"]
@@ -83,7 +84,7 @@ def save(df):
     df.to_csv("prueba.csv")
     df.to_html("prueba.html")
 
-save(result_pandas)
+save(df)
 
 # sys.stdout = open("output/"+names[1], "w+")
 # show.show(truncate=False)
