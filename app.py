@@ -42,9 +42,9 @@ for i in range(5):
     print(r.json()['image_url'])
     video=r.json()['trailer_url']
     print(r.json()['trailer_url'])
-    images.append(image)
+    images.append('<img src="'+image+'" />')
     videos.append(video)
-    time.sleep(2)
+    time.sleep(1)
 
 df['Image'] = images
 df['Trailer'] = videos
@@ -59,10 +59,6 @@ def save(df):
     df.to_html("prueba.html")
 
 save(df)
-
-# sys.stdout = open("output/"+names[1], "w+")
-# show.show(truncate=False)
-# sys.stdout.close()
 
 # blob = bucket.blob("output/"+names[1])
 # blob.upload_from_filename("output/"+names[1])
