@@ -16,30 +16,29 @@ ratings = spark.read.csv("gs://anime-jarr/rating_complete.csv", header=True,infe
 anime = spark.read.csv("gs://anime-jarr/anime.csv", header=True,inferSchema=True,sep=",")
 
 (training,test) = ratings.randomSplit([0.8, 0.2])
-als = ALS(maxIter=5, regParam=0.01, userCol="user_id", itemCol="anime_id", ratingCol="rating", coldStartStrategy="drop")
+als = ALS(maxIter=10, regParam=0.1, userCol="user_id", itemCol="anime_id", ratingCol="rating", coldStartStrategy="drop")
 model=als.fit(training)
 
 users = ratings.filter(ratings["user_id"]==user_id_target)
 userSubsetRecs = model.recommendForUserSubset(users, 100)
 
 movies=userSubsetRecs.first()['recommendations']
-
 recommendations=[]
 for movie in movies:
     recommendations.append(movie['anime_id'])
-
 result = anime.filter((anime.ID).isin(recommendations)).select('ID','Name','Japanese name','Type')
 
-df_tv = result.filter(result['Type']=="TV")
-df_movie = result.filter(result['Type']=="Movie")
+df_tv = result.filter(result['Type']=="TV").toPandas()
+df_movie = result.filter(result['Type']=="Movie").toPandas()
 
-df_tv = df_tv.toPandas()
-df_tv = df_tv[0:5]
+# df_tv = df_tv.toPandas()
+# df_tv = df_tv[0:5]
 
 # names = ["peliculas.txt","series.txt"]
 # types = ['Movie', 'TV']
 
 def addImageVideo(df):
+    df= df[0:5]
     images = []
     videos = []
     for i in range(5):
@@ -65,5 +64,4 @@ def save(df, name):
 
 df = addImageVideo(df_tv)
 save(df, 'television')
-
 
