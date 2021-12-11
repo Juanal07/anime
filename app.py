@@ -24,15 +24,12 @@ for movie in movies:
 result = anime.filter((anime.ID).isin(recommendations)).select('ID','Name','Japanese name','Type')
 df_tv = result.filter(result['Type']=="TV").toPandas()
 df_movie = result.filter(result['Type']=="Movie").toPandas()
-print(df_tv)
-print(df_movie)
 
 def save(df,name):
     local_df= df[0:5]
     images = []
     videos = []
     for i in range(5):
-        # print(str(local_df.iloc[i].loc['ID']))
         r = requests.get('https://api.jikan.moe/v3/anime/'+str(local_df.iloc[i].loc['ID']))
         image=str(r.json()['image_url'])
         print(image)
@@ -41,18 +38,15 @@ def save(df,name):
         images.append('<img src="'+image+'" />')
         videos.append('<iframe width="420" height="315" src="'+video+'"></iframe>')
         time.sleep(2)
-    print(local_df)
-    print(images)
-    print(videos)
     local_df['Image'] = images
     local_df['Trailer'] = videos
-    local_df.to_csv("output/{}.csv".format(name))
-    blob = bucket.blob("output/{}.csv".format(name))
-    blob.upload_from_filename("output/{}.csv".format(name))
+    local_df.to_csv("output/{}.txt".format(name))
+    blob = bucket.blob("output/{}.txt".format(name))
+    blob.upload_from_filename("output/{}.txt".format(name))
     local_df.to_html("output/{}.html".format(name),escape=False)
     blob = bucket.blob("output/{}.html".format(name))
     blob.upload_from_filename("output/{}.html".format(name))
 
 save(df_tv, 'series')
-save(df_movie, 'películas')
+save(df_movie, 'peliculas')
 
