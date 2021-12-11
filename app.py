@@ -57,7 +57,8 @@ for movie in movies:
     recommendations.append(movie['anime_id'])
 
 # ratings = ratings.join(anime,ratings.anime_id==anime.ID,"inner").select(ratings["*"],anime["Type"])
-result = anime.filter((anime.ID).isin(recommendations)).join(anime,ratings.anime_id==anime.ID,"inner").select(ratings["*"],anime["Type"])
+result = anime.filter((anime.ID).isin(recommendations)).join(anime,ratings.anime_id==anime.ID,"inner")
+# result = result.select(ratings["*"],anime["Type"])
 result = result.select('ID','Name','Japanese name')
 
 sys.stdout = open("output/"+names[1], "w+")
