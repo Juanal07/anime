@@ -67,11 +67,11 @@ print(result_pandas)
 # tv = result.filter(result['Type']=="TV")
 # movies = result.filter(result['Type']=="Movie")
 
-# def save(df):
-#     open
-#     write
-#     close
+def save(df):
+    df.savetxt("prueba.txt")
+    df.to_csv("prueba.csv")
 
+save(result_pandas)
 
 # sys.stdout = open("output/"+names[1], "w+")
 # show.show(truncate=False)
