@@ -45,6 +45,9 @@ for i in range(5):
     images.append('<img src="'+image+'" />')
     videos.append('<iframe width="420" height="315" src="'+video+'"></iframe>')
     time.sleep(2)
+print(local_df)
+print(images)
+print(videos)
 local_df['Image'] = images
 local_df['Trailer'] = videos
 local_df.to_csv("output/{}.csv".format(name))
