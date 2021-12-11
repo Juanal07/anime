@@ -56,7 +56,7 @@ df['Trailer'] = videos
 
 def save(df):
     df.to_csv("prueba.csv")
-    df.to_html("prueba.html")
+    df.to_html("prueba.html",escape=False)
 
 save(df)
 
