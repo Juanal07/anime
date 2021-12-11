@@ -1,0 +1,6 @@
+,ID,Name,Japanese name,Type,Image,Trailer
+0,3786,Evangelion: 3.0+1.0 Thrice Upon a Time,シン・エヴァンゲリオン劇場版:||,Movie,"<img src=""https://cdn.myanimelist.net/images/anime/1422/113533.jpg"" />","<iframe width=""420"" height=""315"" src=""https://www.youtube.com/embed/d8mf0qDD3Qg?enablejsapi=1&wmode=opaque&autoplay=1""></iframe>"
+1,15335,Gintama Movie 2: Kanketsu-hen - Yorozuya yo Eien Nare,劇場版 銀魂 完結篇 万事屋よ永遠なれ,Movie,"<img src=""https://cdn.myanimelist.net/images/anime/10/51723.jpg"" />","<iframe width=""420"" height=""315"" src=""https://www.youtube.com/embed/UhJM5rVqaF8?enablejsapi=1&wmode=opaque&autoplay=1""></iframe>"
+2,28023,Tsuru no Sugomori,つるのすごもり,Movie,"<img src=""https://cdn.myanimelist.net/img/sp/icon/apple-touch-icon-256.png"" />","<iframe width=""420"" height=""315"" src=""None""></iframe>"
+3,28851,Koe no Katachi,聲の形,Movie,"<img src=""https://cdn.myanimelist.net/images/anime/1122/96435.jpg"" />","<iframe width=""420"" height=""315"" src=""https://www.youtube.com/embed/XBNWo25izJ8?enablejsapi=1&wmode=opaque&autoplay=1""></iframe>"
+4,32281,Kimi no Na wa.,君の名は。,Movie,"<img src=""https://cdn.myanimelist.net/images/anime/5/87048.jpg"" />","<iframe width=""420"" height=""315"" src=""https://www.youtube.com/embed/3KR8_igDs1Y?enablejsapi=1&wmode=opaque&autoplay=1""></iframe>"
