@@ -14,7 +14,7 @@ user_id_target=666666
 ratings = spark.read.csv("gs://anime-jarr/rating_complete.csv", header=True,inferSchema=True,sep=",")
 anime = spark.read.csv("gs://anime-jarr/anime.csv", header=True,inferSchema=True,sep=",")
 (training,test) = ratings.randomSplit([0.8, 0.2])
-als = ALS(maxIter=15, regParam=0.1, userCol="user_id", itemCol="anime_id", ratingCol="rating", coldStartStrategy="drop")
+als = ALS(maxIter=5, regParam=0.01, implicitPrefs=True, userCol="user_id", itemCol="anime_id", ratingCol="rating", coldStartStrategy="drop")
 model=als.fit(training)
 predictions = model.transform(test)
 evaluator = RegressionEvaluator(metricName="rmse", labelCol="rating", predictionCol="prediction")
@@ -59,3 +59,5 @@ save(df_movie, 'peliculas')
 # error con 20 y 0.1
 # 1.59 con 10 y 1.0
 # 1.13 con 15 y 0.01
+# 1.13 con 15 y 0.1
+# implicit prefs true, 5 y 0.01

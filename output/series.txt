@@ -1,6 +1,6 @@
 ,ID,Name,Japanese name,Type,Image,Trailer
-0,1,Cowboy Bebop,カウボーイビバップ,TV,"<img src=""https://cdn.myanimelist.net/images/anime/4/19644.jpg"" />","<iframe width=""420"" height=""315"" src=""https://www.youtube.com/embed/qig4KOK2R2g?enablejsapi=1&wmode=opaque&autoplay=1""></iframe>"
-1,19,Monster,モンスター,TV,"<img src=""https://cdn.myanimelist.net/images/anime/10/18793.jpg"" />","<iframe width=""420"" height=""315"" src=""None""></iframe>"
-2,245,Great Teacher Onizuka,グレート・ティーチャー・オニヅカ,TV,"<img src=""https://cdn.myanimelist.net/images/anime/13/11460.jpg"" />","<iframe width=""420"" height=""315"" src=""None""></iframe>"
-3,263,Hajime no Ippo,はじめの一歩 THE FIGHTING!,TV,"<img src=""https://cdn.myanimelist.net/images/anime/4/86334.jpg"" />","<iframe width=""420"" height=""315"" src=""None""></iframe>"
-4,338,Versailles no Bara,ベルサイユのばら,TV,"<img src=""https://cdn.myanimelist.net/images/anime/9/57043.jpg"" />","<iframe width=""420"" height=""315"" src=""https://www.youtube.com/embed/XMRtUOOHT_o?enablejsapi=1&wmode=opaque&autoplay=1""></iframe>"
+0,68,Black Cat (TV),ブラックキャット,TV,"<img src=""https://cdn.myanimelist.net/images/anime/1485/110010.jpg"" />","<iframe width=""420"" height=""315"" src=""https://www.youtube.com/embed/AwHhnVLrTZk?enablejsapi=1&wmode=opaque&autoplay=1""></iframe>"
+1,71,Full Metal Panic!,フルメタル・パニック！,TV,"<img src=""https://cdn.myanimelist.net/images/anime/2/75259.jpg"" />","<iframe width=""420"" height=""315"" src=""https://www.youtube.com/embed/wV6l4LmvE0s?enablejsapi=1&wmode=opaque&autoplay=1""></iframe>"
+2,121,Fullmetal Alchemist,鋼の錬金術師,TV,"<img src=""https://cdn.myanimelist.net/images/anime/10/75815.jpg"" />","<iframe width=""420"" height=""315"" src=""https://www.youtube.com/embed/NR5HHcLPulc?enablejsapi=1&wmode=opaque&autoplay=1""></iframe>"
+3,174,Tenjou Tenge,天上天下,TV,"<img src=""https://cdn.myanimelist.net/images/anime/10/8380.jpg"" />","<iframe width=""420"" height=""315"" src=""None""></iframe>"
+4,189,Love Hina,ラブひな,TV,"<img src=""https://cdn.myanimelist.net/images/anime/1153/99366.jpg"" />","<iframe width=""420"" height=""315"" src=""https://www.youtube.com/embed/WQTp0KZO1DI?enablejsapi=1&wmode=opaque&autoplay=1""></iframe>"
