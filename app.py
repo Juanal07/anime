@@ -35,18 +35,16 @@ df = result.toPandas()
 def addImageVideo(df):
     images = []
     videos = []
-
     for i in range(5):
         print(str(df.iloc[i].loc['ID']))
         r = requests.get('https://api.jikan.moe/v3/anime/'+str(df.iloc[i].loc['ID']))
         image=r.json()['image_url']
         print(r.json()['image_url'])
-        video=r.json()['trailer_url']
+        video=str(r.json()['trailer_url'])
         print(r.json()['trailer_url'])
         images.append('<img src="'+image+'" />')
         videos.append('<iframe width="420" height="315" src="'+video+'"></iframe>')
         time.sleep(2)
-
     df['Image'] = images
     df['Trailer'] = videos
 
