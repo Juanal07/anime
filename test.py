@@ -1,4 +1,5 @@
 import pandas as pd
+import time
 
 df = pd.read_csv ('prueba.csv')
 print(df)
@@ -17,6 +18,7 @@ for i in range(5):
     print(r.json()['trailer_url'])
     images.append(image)
     videos.append(video)
+    time.sleep(2)
 
 df['Image'] = images
 df['Trailer'] = videos

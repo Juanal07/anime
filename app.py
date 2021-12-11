@@ -44,7 +44,7 @@ for i in range(5):
     print(r.json()['trailer_url'])
     images.append(image)
     videos.append(video)
-    timesleep(1)
+    time.sleep(2)
 
 df['Image'] = images
 df['Trailer'] = videos
