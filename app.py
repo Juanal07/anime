@@ -10,7 +10,7 @@ bucket = storage_client.bucket('anime-jarr')
 user_id_target=666666
 
 ratings = spark.read.csv("gs://anime-jarr/rating_complete.csv", header=True,inferSchema=True,sep=",")
-anime = spark.read.csv("gs://anime-jarr/anime.csv", header=True,inferSchema=True,sep=",",escape="\"")
+anime = spark.read.csv("gs://anime-jarr/anime.csv", header=True,inferSchema=True,sep=",")
 
 # ratings = ratings.join(anime,ratings.anime_id==anime.ID,"inner").select(ratings["*"],anime["Type"])
 # ratings_tv= ratings.filter(ratings['Type']=="TV")

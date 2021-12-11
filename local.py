@@ -5,12 +5,15 @@ import sys
 from google.cloud import storage
 
 spark = SparkSession.builder.master("local[*]").getOrCreate()
-storage_client = storage.Client()
-bucket = storage_client.bucket('anime-jarr')
-user_id_target=666666
+# storage_client = storage.Client()
+# bucket = storage_client.bucket('anime-jarr')
+# user_id_target=666666
+user_id_target=0
 
-ratings = spark.read.csv("gs://anime-jarr/rating_complete.csv", header=True,inferSchema=True,sep=",")
-anime = spark.read.csv("gs://anime-jarr/anime.csv", header=True,inferSchema=True,sep=",",escape="\"")
+# ratings = spark.read.csv("gs://anime-jarr/rating_complete.csv", header=True,inferSchema=True,sep=",")
+# anime = spark.read.csv("gs://anime-jarr/anime.csv", header=True,inferSchema=True,sep=",",escape="\"")
+ratings = spark.read.csv("dataset/rating_test.csv", header=True,inferSchema=True,sep=",")
+anime = spark.read.csv("dataset/anime.csv", header=True,inferSchema=True,sep=",",escape="\"")
 
 ratings = ratings.join(anime,ratings.anime_id==anime.ID,"inner").select(ratings["*"],anime["Type"])
 ratings_tv= ratings.filter(ratings['Type']=="TV")
@@ -33,7 +36,7 @@ for r in ratings:
     sys.stdout = open("output/"+names[i], "w+")
     result.show(truncate=False)
     sys.stdout.close()
-    blob = bucket.blob("output/"+names[i])
-    blob.upload_from_filename("output/"+names[i])
+    # blob = bucket.blob("output/"+names[i])
+    # blob.upload_from_filename("output/"+names[i])
     i+=1
 
