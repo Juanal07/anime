@@ -1,6 +1,6 @@
 ,ID,Name,Japanese name,Type,Image,Trailer
 0,1,Cowboy Bebop,カウボーイビバップ,TV,"<img src=""https://cdn.myanimelist.net/images/anime/4/19644.jpg"" />","<iframe width=""420"" height=""315"" src=""https://www.youtube.com/embed/qig4KOK2R2g?enablejsapi=1&wmode=opaque&autoplay=1""></iframe>"
 1,19,Monster,モンスター,TV,"<img src=""https://cdn.myanimelist.net/images/anime/10/18793.jpg"" />","<iframe width=""420"" height=""315"" src=""None""></iframe>"
-2,30,Neon Genesis Evangelion,新世紀エヴァンゲリオン,TV,"<img src=""https://cdn.myanimelist.net/images/anime/1314/108941.jpg"" />","<iframe width=""420"" height=""315"" src=""https://www.youtube.com/embed/woto6QFUNbg?enablejsapi=1&wmode=opaque&autoplay=1""></iframe>"
-3,226,Elfen Lied,エルフェンリート,TV,"<img src=""https://cdn.myanimelist.net/images/anime/10/6883.jpg"" />","<iframe width=""420"" height=""315"" src=""https://www.youtube.com/embed/IItTqRrRkqI?enablejsapi=1&wmode=opaque&autoplay=1""></iframe>"
-4,245,Great Teacher Onizuka,グレート・ティーチャー・オニヅカ,TV,"<img src=""https://cdn.myanimelist.net/images/anime/13/11460.jpg"" />","<iframe width=""420"" height=""315"" src=""None""></iframe>"
+2,33,Kenpuu Denki Berserk,剣風伝奇ベルセルク,TV,"<img src=""https://cdn.myanimelist.net/images/anime/12/18520.jpg"" />","<iframe width=""420"" height=""315"" src=""None""></iframe>"
+3,170,Slam Dunk,スラムダンク,TV,"<img src=""https://cdn.myanimelist.net/images/anime/12/86890.jpg"" />","<iframe width=""420"" height=""315"" src=""None""></iframe>"
+4,205,Samurai Champloo,サムライチャンプルー,TV,"<img src=""https://cdn.myanimelist.net/images/anime/11/29134.jpg"" />","<iframe width=""420"" height=""315"" src=""None""></iframe>"
