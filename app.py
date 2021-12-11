@@ -1,3 +1,4 @@
+from os import write
 from pyspark.sql import SparkSession
 from pyspark.ml.recommendation import ALS
 import sys
@@ -57,13 +58,20 @@ for movie in movies:
 
 result = anime.filter((anime.ID).isin(recommendations)).select('ID','Name','Japanese name','Type')
 
-result_pandas = pd.DataFrame(result)
+result_pandas = result.toPandas()
 print(result_pandas)
 
-names = ["peliculas.txt","series.txt"]
-types = ['Movie', 'TV']
+# names = ["peliculas.txt","series.txt"]
+# types = ['Movie', 'TV']
+#
+# tv = result.filter(result['Type']=="TV")
+# movies = result.filter(result['Type']=="Movie")
 
-show = result.filter(result['Type']=="TV")
+# def save(df):
+#     open
+#     write
+#     close
+
 
 # sys.stdout = open("output/"+names[1], "w+")
 # show.show(truncate=False)
