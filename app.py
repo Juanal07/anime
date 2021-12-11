@@ -5,6 +5,7 @@ import sys
 from google.cloud import storage
 import pandas as pd
 import requests
+import time
 
 spark = SparkSession.builder.master("local[*]").getOrCreate()
 storage_client = storage.Client()
@@ -43,10 +44,10 @@ for i in range(5):
     print(r.json()['trailer_url'])
     images.append(image)
     videos.append(video)
+    timesleep(1)
 
 df['Image'] = images
 df['Trailer'] = videos
-
 
 # names = ["peliculas.txt","series.txt"]
 # types = ['Movie', 'TV']
