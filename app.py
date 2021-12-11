@@ -1,9 +1,6 @@
-from os import write
 from pyspark.sql import SparkSession
 from pyspark.ml.recommendation import ALS
-import sys
 from google.cloud import storage
-import pandas as pd
 import requests
 import time
 
@@ -32,26 +29,28 @@ df_tv = result.filter(result['Type']=="TV").toPandas()
 df_movie = result.filter(result['Type']=="Movie").toPandas()
 
 def save(df,name):
-    df= df[0:5]
+    local_df= df[0:5]
     images = []
     videos = []
     for i in range(5):
-        print(str(df.iloc[i].loc['ID']))
-        r = requests.get('https://api.jikan.moe/v3/anime/'+str(df.iloc[i].loc['ID']))
-        image=r.json()['image_url']
+        print(str(local_df.iloc[i].loc['ID']))
+        r = requests.get('https://api.jikan.moe/v3/anime/'+str(local_df.iloc[i].loc['ID']))
+        image=str(r.json()['image_url'])
         print(r.json()['image_url'])
         video=str(r.json()['trailer_url'])
         print(r.json()['trailer_url'])
         images.append('<img src="'+image+'" />')
         videos.append('<iframe width="420" height="315" src="'+video+'"></iframe>')
         time.sleep(2)
-    df['Image'] = images
-    df['Trailer'] = videos
-    df.to_csv("output/{}.csv".format(name))
+    local_df['Image'] = images
+    local_df['Trailer'] = videos
+    local_df.to_csv("output/{}.csv".format(name))
     blob = bucket.blob("output/{}.csv".format(name))
     blob.upload_from_filename("output/{}.csv".format(name))
-    df.to_html("output/{}.html".format(name),escape=False)
+    local_df.to_html("output/{}.html".format(name),escape=False)
+    blob = bucket.blob("output/{}.html".format(name))
+    blob.upload_from_filename("output/{}.html".format(name))
 
 save(df_tv, 'Series')
-save(df_movie, 'Películas')
+# save(df_movie, 'Películas')
 
