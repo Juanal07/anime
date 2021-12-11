@@ -30,8 +30,7 @@ result = anime.filter((anime.ID).isin(recommendations)).select('ID','Name','Japa
 df_tv = result.filter(result['Type']=="TV").toPandas()
 df_movie = result.filter(result['Type']=="Movie").toPandas()
 
-# def save(df,name):
-name = 'Series'
+name='Series'
 
 local_df= df_tv[0:5]
 images = []
