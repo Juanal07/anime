@@ -3,6 +3,8 @@ from pyspark.ml.recommendation import ALS
 from google.cloud import storage
 import requests
 import time
+import pandas as pd
+pd.options.mode.chained_assignment = None  # default='warn'
 
 spark = SparkSession.builder.master("local[*]").getOrCreate()
 storage_client = storage.Client()
@@ -44,9 +46,9 @@ def save(df,name):
     print(videos)
     local_df['Image'] = images
     local_df['Trailer'] = videos
-    local_df.to_csv("output/{}.txt".format(name))
-    blob = bucket.blob("output/{}.txt".format(name))
-    blob.upload_from_filename("output/{}.txt".format(name))
+    local_df.to_csv("output/{}.csv".format(name))
+    blob = bucket.blob("output/{}.csv".format(name))
+    blob.upload_from_filename("output/{}.csv".format(name))
     local_df.to_html("output/{}.html".format(name),escape=False)
     blob = bucket.blob("output/{}.html".format(name))
     blob.upload_from_filename("output/{}.html".format(name))
