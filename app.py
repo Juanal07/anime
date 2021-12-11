@@ -1,5 +1,4 @@
 from pyspark.sql import SparkSession
-from pyspark.ml.evaluation import RegressionEvaluator
 from pyspark.ml.recommendation import ALS
 import sys
 from google.cloud import storage
@@ -60,7 +59,8 @@ for movie in movies:
 result = anime.filter((anime.ID).isin(recommendations))
 # result = result.join(result,result.anime_id==anime.ID,"inner")
 # result = result.select(ratings["*"],anime["Type"])
-result = result.select('ID','Name','Japanese name')
+result = result.select('ID','Name','Japanese name','Type')
+
 
 sys.stdout = open("output/"+names[1], "w+")
 result.show(truncate=False)
