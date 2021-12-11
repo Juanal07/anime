@@ -43,7 +43,7 @@ anime = spark.read.csv("gs://anime-jarr/anime.csv", header=True,inferSchema=True
 # ratings_movies= ratings.filter(ratings['Type']=="Movie")
 # ratings = [ratings_movies,ratings_tv]
 
-(training,test) = ratings.randomSplit([0.9, 0.1])
+(training,test) = ratings.randomSplit([0.8, 0.2])
 als = ALS(maxIter=5, regParam=0.01, userCol="user_id", itemCol="anime_id", ratingCol="rating", coldStartStrategy="drop")
 model=als.fit(training)
 
@@ -60,10 +60,21 @@ result = anime.filter((anime.ID).isin(recommendations)).select('ID','Name','Japa
 
 result_pandas = result.toPandas()
 print(result_pandas)
+print('valor: '+result_pandas[0]['ID'])
+
+import requests
+
+r = requests.get('https://api.jikan.moe/v3/anime/'+result_pandas[0]['ID'])
+image=r.json()['image_url']
+print(r.json()['image_url'])
+video=r.json()['trailer_url']
+print(r.json()['trailer_url'])
+imagenes=[image,0,1,0,1]
+result_pandas['Image'] = imagenes
+
 
 # names = ["peliculas.txt","series.txt"]
 # types = ['Movie', 'TV']
-#
 # tv = result.filter(result['Type']=="TV")
 # movies = result.filter(result['Type']=="Movie")
 
@@ -77,6 +88,7 @@ save(result_pandas)
 # sys.stdout = open("output/"+names[1], "w+")
 # show.show(truncate=False)
 # sys.stdout.close()
+
 # blob = bucket.blob("output/"+names[1])
 # blob.upload_from_filename("output/"+names[1])
 
