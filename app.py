@@ -20,7 +20,7 @@ als = ALS(maxIter=5, regParam=0.01, userCol="user_id", itemCol="anime_id", ratin
 model=als.fit(training)
 
 users = ratings.filter(ratings["user_id"]==user_id_target)
-userSubsetRecs = model.recommendForUserSubset(users, 5)
+userSubsetRecs = model.recommendForUserSubset(users, 100)
 
 movies=userSubsetRecs.first()['recommendations']
 
@@ -31,6 +31,11 @@ for movie in movies:
 result = anime.filter((anime.ID).isin(recommendations)).select('ID','Name','Japanese name','Type')
 
 df = result.toPandas()
+
+# names = ["peliculas.txt","series.txt"]
+# types = ['Movie', 'TV']
+df_tv = df.loc(df['Type']=="TV")
+df_movie = df.loc(df['Type']=="Movie")
 
 def addImageVideo(df):
     images = []
@@ -47,20 +52,16 @@ def addImageVideo(df):
         time.sleep(2)
     df['Image'] = images
     df['Trailer'] = videos
+    return df
 
-addImageVideo(df)
+def save(df, name):
+    df.to_csv("output/{}.csv".format(name))
+    blob = bucket.blob("output/{}.csv".format(name))
+    blob.upload_from_filename("output/{}.csv".format(name))
 
-# names = ["peliculas.txt","series.txt"]
-# types = ['Movie', 'TV']
-# tv = result.filter(result['Type']=="TV")
-# movies = result.filter(result['Type']=="Movie")
+    df.to_html("output/{}.html".format(name),escape=False)
 
-def save(df):
-    df.to_csv("prueba.csv")
-    df.to_html("prueba.html",escape=False)
+df = addImageVideo(df_movie)
+save(df, 'movies')
 
-save(df)
-
-# blob = bucket.blob("output/"+names[1])
-# blob.upload_from_filename("output/"+names[1])
 
