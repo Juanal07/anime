@@ -37,7 +37,6 @@ anime = spark.read.csv("gs://anime-jarr/anime.csv", header=True,inferSchema=True
 #     blob.upload_from_filename("output/"+names[i])
 #     i+=1
 
-ratings = ratings.join(anime,ratings.anime_id==anime.ID,"inner").select(ratings["*"],anime["Type"])
 
 # ratings_tv= ratings.filter(ratings['Type']=="TV")
 # ratings_movies= ratings.filter(ratings['Type']=="Movie")
@@ -47,13 +46,19 @@ names = ["peliculas.txt","series.txt"]
 (training,test) = ratings.randomSplit([0.8, 0.2])
 als = ALS(maxIter=5, regParam=0.01, userCol="user_id", itemCol="anime_id", ratingCol="rating", coldStartStrategy="drop")
 model=als.fit(training)
+
 users = ratings.filter(ratings["user_id"]==user_id_target)
 userSubsetRecs = model.recommendForUserSubset(users, 5)
+
 movies=userSubsetRecs.first()['recommendations']
+
 recommendations=[]
 for movie in movies:
     recommendations.append(movie['anime_id'])
-result = anime.filter((anime.ID).isin(recommendations)).select('ID','English name','Japanese name')
+
+# ratings = ratings.join(anime,ratings.anime_id==anime.ID,"inner").select(ratings["*"],anime["Type"])
+result = anime.filter((anime.ID).isin(recommendations)).join(anime,ratings.anime_id==anime.ID,"inner").select(ratings["*"],anime["Type"])
+result = result.select('ID','Name','Japanese name')
 
 sys.stdout = open("output/"+names[1], "w+")
 result.show(truncate=False)
