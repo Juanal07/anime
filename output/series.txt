@@ -1,6 +1,6 @@
 ,ID,Name,Japanese name,Type,Image,Trailer
-0,19,Monster,モンスター,TV,"<img src=""https://cdn.myanimelist.net/images/anime/10/18793.jpg"" />","<iframe width=""420"" height=""315"" src=""None""></iframe>"
-1,33,Kenpuu Denki Berserk,剣風伝奇ベルセルク,TV,"<img src=""https://cdn.myanimelist.net/images/anime/12/18520.jpg"" />","<iframe width=""420"" height=""315"" src=""None""></iframe>"
-2,136,Hunter x Hunter,HUNTER×HUNTER（ハンター×ハンター）,TV,"<img src=""https://cdn.myanimelist.net/images/anime/8/19473.jpg"" />","<iframe width=""420"" height=""315"" src=""None""></iframe>"
-3,170,Slam Dunk,スラムダンク,TV,"<img src=""https://cdn.myanimelist.net/images/anime/12/86890.jpg"" />","<iframe width=""420"" height=""315"" src=""None""></iframe>"
-4,185,Initial D First Stage,頭文字〈イニシャル〉D,TV,"<img src=""https://cdn.myanimelist.net/images/anime/13/6801.jpg"" />","<iframe width=""420"" height=""315"" src=""None""></iframe>"
+0,1,Cowboy Bebop,カウボーイビバップ,TV,"<img src=""https://cdn.myanimelist.net/images/anime/4/19644.jpg"" />","<iframe width=""420"" height=""315"" src=""https://www.youtube.com/embed/qig4KOK2R2g?enablejsapi=1&wmode=opaque&autoplay=1""></iframe>"
+1,19,Monster,モンスター,TV,"<img src=""https://cdn.myanimelist.net/images/anime/10/18793.jpg"" />","<iframe width=""420"" height=""315"" src=""None""></iframe>"
+2,245,Great Teacher Onizuka,グレート・ティーチャー・オニヅカ,TV,"<img src=""https://cdn.myanimelist.net/images/anime/13/11460.jpg"" />","<iframe width=""420"" height=""315"" src=""None""></iframe>"
+3,263,Hajime no Ippo,はじめの一歩 THE FIGHTING!,TV,"<img src=""https://cdn.myanimelist.net/images/anime/4/86334.jpg"" />","<iframe width=""420"" height=""315"" src=""None""></iframe>"
+4,338,Versailles no Bara,ベルサイユのばら,TV,"<img src=""https://cdn.myanimelist.net/images/anime/9/57043.jpg"" />","<iframe width=""420"" height=""315"" src=""https://www.youtube.com/embed/XMRtUOOHT_o?enablejsapi=1&wmode=opaque&autoplay=1""></iframe>"
