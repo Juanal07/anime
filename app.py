@@ -32,22 +32,25 @@ result = anime.filter((anime.ID).isin(recommendations)).select('ID','Name','Japa
 
 df = result.toPandas()
 
-images = []
-videos = []
+def addImageVideo(df):
+    images = []
+    videos = []
 
-for i in range(5):
-    print(str(df.iloc[i].loc['ID']))
-    r = requests.get('https://api.jikan.moe/v3/anime/'+str(df.iloc[i].loc['ID']))
-    image=r.json()['image_url']
-    print(r.json()['image_url'])
-    video=r.json()['trailer_url']
-    print(r.json()['trailer_url'])
-    images.append('<img src="'+image+'" />')
-    videos.append(video)
-    time.sleep(2)
+    for i in range(5):
+        print(str(df.iloc[i].loc['ID']))
+        r = requests.get('https://api.jikan.moe/v3/anime/'+str(df.iloc[i].loc['ID']))
+        image=r.json()['image_url']
+        print(r.json()['image_url'])
+        video=r.json()['trailer_url']
+        print(r.json()['trailer_url'])
+        images.append('<img src="'+image+'" />')
+        videos.append('<iframe width="420" height="315" src="'+video+'"></iframe>')
+        time.sleep(2)
 
-df['Image'] = images
-df['Trailer'] = videos
+    df['Image'] = images
+    df['Trailer'] = videos
+
+addImageVideo(df)
 
 # names = ["peliculas.txt","series.txt"]
 # types = ['Movie', 'TV']
