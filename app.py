@@ -30,12 +30,14 @@ for movie in movies:
 
 result = anime.filter((anime.ID).isin(recommendations)).select('ID','Name','Japanese name','Type')
 
-df = result.toPandas()
+df_tv = result.filter(result['Type']=="TV")
+df_movie = result.filter(result['Type']=="Movie")
+
+df_tv = df_tv.toPandas()
+df_tv = df_tv[0:5]
 
 # names = ["peliculas.txt","series.txt"]
 # types = ['Movie', 'TV']
-df_tv = df.loc(df['Type']=="TV")
-df_movie = df.loc(df['Type']=="Movie")
 
 def addImageVideo(df):
     images = []
@@ -61,7 +63,7 @@ def save(df, name):
 
     df.to_html("output/{}.html".format(name),escape=False)
 
-df = addImageVideo(df_movie)
-save(df, 'movies')
+df = addImageVideo(df_tv)
+save(df, 'television')
 
 
