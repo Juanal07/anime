@@ -14,7 +14,7 @@ user_id_target=666666
 ratings = spark.read.csv("gs://anime-jarr/rating_complete.csv", header=True,inferSchema=True,sep=",")
 anime = spark.read.csv("gs://anime-jarr/anime.csv", header=True,inferSchema=True,sep=",")
 (training,test) = ratings.randomSplit([0.8, 0.2])
-als = ALS(maxIter=20, regParam=0.1, userCol="user_id", itemCol="anime_id", ratingCol="rating", coldStartStrategy="drop")
+als = ALS(maxIter=10, regParam=1.0, userCol="user_id", itemCol="anime_id", ratingCol="rating", coldStartStrategy="drop")
 model=als.fit(training)
 predictions = model.transform(test)
 evaluator = RegressionEvaluator(metricName="rmse", labelCol="rating", predictionCol="prediction")
@@ -45,13 +45,15 @@ def save(df,name):
         time.sleep(2)
     local_df['Image'] = images
     local_df['Trailer'] = videos
-    local_df.to_csv("output/{}.txt".format(name))
+    local_df.to_csv("output/{}.txt".format(name), encoding="utf-8")
     blob = bucket.blob("output/{}.txt".format(name))
     blob.upload_from_filename("output/{}.txt".format(name))
-    local_df.to_html("output/{}.html".format(name),escape=False)
+    local_df.to_html("output/{}.html".format(name),escape=False, encoding="utf-8")
     blob = bucket.blob("output/{}.html".format(name))
     blob.upload_from_filename("output/{}.html".format(name))
 
 save(df_tv, 'series')
 save(df_movie, 'peliculas')
 
+# 1.15 con 10 y 0.1
+# error con 20 y 0.1
