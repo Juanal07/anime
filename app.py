@@ -2,6 +2,7 @@ from pyspark.sql import SparkSession
 from pyspark.ml.recommendation import ALS
 import sys
 from google.cloud import storage
+import pandas as pd
 
 spark = SparkSession.builder.master("local[*]").getOrCreate()
 storage_client = storage.Client()
@@ -40,9 +41,8 @@ anime = spark.read.csv("gs://anime-jarr/anime.csv", header=True,inferSchema=True
 # ratings_tv= ratings.filter(ratings['Type']=="TV")
 # ratings_movies= ratings.filter(ratings['Type']=="Movie")
 # ratings = [ratings_movies,ratings_tv]
-names = ["peliculas.txt","series.txt"]
 
-(training,test) = ratings.randomSplit([0.8, 0.2])
+(training,test) = ratings.randomSplit([0.9, 0.1])
 als = ALS(maxIter=5, regParam=0.01, userCol="user_id", itemCol="anime_id", ratingCol="rating", coldStartStrategy="drop")
 model=als.fit(training)
 
@@ -55,16 +55,19 @@ recommendations=[]
 for movie in movies:
     recommendations.append(movie['anime_id'])
 
-# ratings = ratings.join(anime,ratings.anime_id==anime.ID,"inner").select(ratings["*"],anime["Type"])
-result = anime.filter((anime.ID).isin(recommendations))
-# result = result.join(result,result.anime_id==anime.ID,"inner")
-# result = result.select(ratings["*"],anime["Type"])
-result = result.select('ID','Name','Japanese name','Type')
+result = anime.filter((anime.ID).isin(recommendations)).select('ID','Name','Japanese name','Type')
 
+result_pandas = pd.DataFrame(result)
+print(result_pandas)
 
-sys.stdout = open("output/"+names[1], "w+")
-result.show(truncate=False)
-sys.stdout.close()
-blob = bucket.blob("output/"+names[1])
-blob.upload_from_filename("output/"+names[1])
+names = ["peliculas.txt","series.txt"]
+types = ['Movie', 'TV']
+
+show = result.filter(result['Type']=="TV")
+
+# sys.stdout = open("output/"+names[1], "w+")
+# show.show(truncate=False)
+# sys.stdout.close()
+# blob = bucket.blob("output/"+names[1])
+# blob.upload_from_filename("output/"+names[1])
 
