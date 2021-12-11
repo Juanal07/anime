@@ -31,13 +31,7 @@ result = anime.filter((anime.ID).isin(recommendations)).select('ID','Name','Japa
 df_tv = result.filter(result['Type']=="TV").toPandas()
 df_movie = result.filter(result['Type']=="Movie").toPandas()
 
-# df_tv = df_tv.toPandas()
-# df_tv = df_tv[0:5]
-
-# names = ["peliculas.txt","series.txt"]
-# types = ['Movie', 'TV']
-
-def addImageVideo(df):
+def save(df,name):
     df= df[0:5]
     images = []
     videos = []
@@ -53,15 +47,11 @@ def addImageVideo(df):
         time.sleep(2)
     df['Image'] = images
     df['Trailer'] = videos
-    return df
-
-def save(df, name):
     df.to_csv("output/{}.csv".format(name))
     blob = bucket.blob("output/{}.csv".format(name))
     blob.upload_from_filename("output/{}.csv".format(name))
-
     df.to_html("output/{}.html".format(name),escape=False)
 
-df = addImageVideo(df_tv)
-save(df, 'television')
+save(df_tv, 'Series')
+save(df_movie, 'Películas')
 
